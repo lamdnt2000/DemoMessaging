@@ -32,6 +32,7 @@
         android:id="@+id/txtSMSMessage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textSize="25dp"
         android:text="Msg" />
     <Button
         android:id="@+id/btSendEmail"
@@ -40,5 +41,40 @@
         android:gravity="center"
         android:onClick="clickToSendEmail"
         android:text="Send Email" />
+    <TextView
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Message form"
+        android:textStyle="bold"
+        android:textSize="30dp"
+        />
+    <TextView
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Phone"
+        android:textSize="25dp"
+        />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="phone"
+        android:id="@+id/txtPhone"
+        />
+    <TextView
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Body message"
+        android:textSize="25dp"
+        />
+    <EditText
+
+        android:id="@+id/txtMsg"
+        android:layout_width="match_parent"
+        android:layout_height="143dp"
+        android:inputType="textMultiLine" />
+
 
 </LinearLayout>

@@ -17,6 +17,7 @@ import android.telephony.SmsManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,9 +40,7 @@ public class MainActivity extends AppCompatActivity {
     private boolean registerIntentReceiver;
     private boolean registerSendReceiver;
     private boolean registerDeliveredReceiver;
-    private String phone = "0348641261";
-
-
+    private EditText txtPhone,txtMsg;
     private BroadcastReceiver intentReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -55,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         status = 2;
         if (status == 2) {
             sentPI = PendingIntent.getBroadcast(this, 0, new Intent(SENT), 0);
@@ -74,7 +74,9 @@ public class MainActivity extends AppCompatActivity {
 
     public void clickToSendSMS(View view) {
         status = 0;
-        sendSMS(phone, "Messaging Demo - Mobile Programming");
+        txtPhone = findViewById(R.id.txtPhone);
+        txtMsg = findViewById(R.id.txtMsg);
+        sendSMS(txtPhone.getText().toString(), txtMsg.getText().toString());
     }
 
     @Override
@@ -182,8 +184,10 @@ public class MainActivity extends AppCompatActivity {
         status = 0;
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setType("vnd.android-dir/mms-sms");
-        intent.putExtra("address", phone);
-        intent.putExtra("sms_body", "Send message using intent - Mobile Programming");
+        txtPhone = findViewById(R.id.txtPhone);
+        txtMsg = findViewById(R.id.txtMsg);
+        intent.putExtra("address", txtPhone.getText().toString());
+        intent.putExtra("sms_body", txtMsg.getText().toString());
 
 
         try {
@@ -259,8 +263,10 @@ public class MainActivity extends AppCompatActivity {
         };
         registerReceiver(smsSentReceiver, new IntentFilter(SENT));
         registerReceiver(smsDeliveredReceiver, new IntentFilter(DELIVERED));
-        sms.sendTextMessage(phone, null,
-                "Messaging Demo with Feedback - Mobile Programming", sentPI,
+        txtPhone = findViewById(R.id.txtPhone);
+        txtMsg = findViewById(R.id.txtMsg);
+        sms.sendTextMessage(txtPhone.getText().toString(), null,
+                txtMsg.getText().toString(), sentPI,
                 deliveredPI);
     }
 
